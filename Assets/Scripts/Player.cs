@@ -10,15 +10,16 @@ public class Player : MonoBehaviour
     Vector3 horizontalVector, verticalVector, velocityVector
         , horizontalDir=new Vector3(1,0,0), verticalDir=new Vector3(0,0,1);
 
+    [Range(1,10)]
+    public int speed = 2; 
     [SerializeField]
-    private int speed = 5; 
-    [SerializeField]
-    public Camera cam;
+    private Camera cam;
 
 
 
-    [SerializeField]
-    private int mouseSensivity = 20;
+    [Range(1, 30)]
+    public int mouseSensivity = 20;
+    public static Quaternion lookDir;
 
     void Start()
     {
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour
         Vector3 relativePos =new Vector3(mousePos.x - transform.position.x, transform.position.y,
             mousePos.z-transform.position.z)*mouseSensivity;
 
-        Quaternion lookDir = Quaternion.LookRotation(relativePos);
+        lookDir = Quaternion.LookRotation(relativePos);
 
         transform.rotation = lookDir;
     }

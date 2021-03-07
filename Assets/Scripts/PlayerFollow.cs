@@ -6,7 +6,6 @@ public class PlayerFollow : MonoBehaviour
 {
     [SerializeField]
     private Transform playerT;
-
     private Vector3 lookDir;
 
     void Start()

@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [Range(1, 10)]
     public int speed = 1;
     private int deltaDistance = 2;
-    private bool stop = false; private int explosionDelta = 1;
+    private bool stop = false; private int explosionDelta = 1, explosionRadius=4; 
 
     GameObject player;
 
@@ -26,16 +26,21 @@ public class Enemy : MonoBehaviour
         if ((this.transform.position - player.transform.position).magnitude >= deltaDistance
             && !stop)
         {
-            transform.LookAt(player.transform);
+            this.transform.LookAt(player.transform);
             this.transform.position = Vector3.MoveTowards(
             this.transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+        else if((this.transform.position - player.transform.position).magnitude < deltaDistance
+            && !stop)
+        {
+            StartCoroutine(Explode());
         }
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health<=0)
+        this.health -= damage;
+        if (this.health<=0)
         {
             StartCoroutine(Explode());
         }
@@ -43,19 +48,18 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Explode()
     {
-        stop = true;//stop movement
+        this.stop = true;//stop movement
 
         yield return new WaitForSeconds(explosionDelta);
 
-        Collider[] nearbyObjects = Physics.OverlapSphere(this.transform.position, 5f);
+        Collider[] nearbyObjects = Physics.OverlapSphere(this.transform.position, this.explosionRadius);
 
         foreach (Collider col in nearbyObjects)
         {
-            if (col.gameObject.tag == "player")
+            if(col.gameObject.tag=="enemy" || col.gameObject.tag=="player")
             {
                 Destroy(col.gameObject);
-                break;
-            }
+            }           
         }
 
         Destroy(this.gameObject);

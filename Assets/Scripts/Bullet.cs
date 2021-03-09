@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -8,6 +6,7 @@ public class Bullet : MonoBehaviour
 
     [Range(1,40)]
     public int speed = 30;
+    private int damage = 25;
     
     void Start()
     {
@@ -16,6 +15,10 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.tag=="enemy")
+        {
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(this.damage);
+        }
         Destroy(this.transform.gameObject);
     }
 

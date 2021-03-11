@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    Rigidbody fizik;
     public int health = 100;
     [Range(1, 10)]
     public int speed = 1;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("player");
+        fizik = this.transform.GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
@@ -50,6 +52,8 @@ public class Enemy : MonoBehaviour
     {
         this.stop = true;//stop movement
 
+        fizik.constraints = RigidbodyConstraints.FreezeAll;
+
         yield return new WaitForSeconds(explosionDelta);
 
         Collider[] nearbyObjects = Physics.OverlapSphere(this.transform.position, this.explosionRadius);
@@ -62,6 +66,6 @@ public class Enemy : MonoBehaviour
             }           
         }
 
-        Destroy(this.gameObject);
+        Destroy(this.transform.gameObject);
     }
 }

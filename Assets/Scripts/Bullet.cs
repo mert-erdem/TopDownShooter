@@ -13,11 +13,11 @@ public class Bullet : MonoBehaviour
         Movement();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag=="enemy")
+        if (other.gameObject.tag == "enemy")
         {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(this.damage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(this.damage);
         }
         Destroy(this.transform.gameObject);
     }

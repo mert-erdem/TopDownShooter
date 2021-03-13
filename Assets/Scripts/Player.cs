@@ -14,10 +14,10 @@ public class Player : MonoBehaviour
     private Camera cam;
 
 
-
     [Range(1, 30)]
     public int mouseSensivity = 20;
     public static Quaternion lookDir;
+
 
     void Start()
     {

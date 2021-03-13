@@ -4,12 +4,12 @@ using UnityEngine;
 public class CanvasController : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI timeText;
+    private TextMeshProUGUI timeText, ammoText;
 
 
-    private void Start()
+    void Start()
     {
-        InvokeRepeating("TimeChange", 0f, 1f);
+        InvokeRepeating("TimeChange", 0f, 1f);//repeat TimeChange function each second
     }
 
     private void TimeChange()
@@ -17,4 +17,8 @@ public class CanvasController : MonoBehaviour
         timeText.text = (int)Time.realtimeSinceStartup/60 + ":" + (int)Time.realtimeSinceStartup % 60;
     }
 
+    public void AmmoChanged(int ammo)
+    {
+        ammoText.text = "ammo : " + ammo.ToString();
+    }
 }

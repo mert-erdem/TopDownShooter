@@ -8,7 +8,11 @@ public class Enemy : MonoBehaviour
     [Range(1, 10)]
     public int speed = 1;
     private int deltaDistance = 2;
-    private bool stop = false; private int explosionDelta = 1, explosionRadius=4; 
+    private bool stop = false; private int explosionDelta = 1, explosionRadius=4;
+
+    //Collectables;
+    [SerializeField]
+    private GameObject maxAmmo;
 
     GameObject player;
 
@@ -66,6 +70,16 @@ public class Enemy : MonoBehaviour
             }           
         }
 
+        RandomDropCollectable();//drop collectables like "MaxAmmo" via a constant range.
+
         Destroy(this.transform.gameObject);
+    }
+
+    private void RandomDropCollectable()
+    {
+        if(Random.Range(0, 100)>90)
+        {
+            Instantiate(maxAmmo, this.transform.position, Quaternion.identity);
+        }
     }
 }

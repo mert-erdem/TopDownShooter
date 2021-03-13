@@ -8,6 +8,9 @@ TagManager:
   - player
   - enemy
   - ground
+  - ui
+  - collactable
+  - weapon
   layers:
   - Default
   - TransparentFX

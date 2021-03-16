@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -56,4 +58,12 @@ public class Player : MonoBehaviour
 
         transform.rotation = lookDir;
     }
+
+    //Game over statement;
+    private void OnDestroy()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
+    }
+
+    
 }

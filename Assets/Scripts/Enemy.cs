@@ -16,10 +16,13 @@ public class Enemy : MonoBehaviour
 
     GameObject player;
 
+    private ParticleSystem explosionEffect;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("player");
         fizik = this.transform.GetComponent<Rigidbody>();
+        explosionEffect = this.transform.GetComponentInChildren<ParticleSystem>();
     }
 
     void FixedUpdate()
@@ -60,6 +63,12 @@ public class Enemy : MonoBehaviour
 
         yield return new WaitForSeconds(explosionDelta);
 
+        this.transform.GetComponent<Collider>().enabled = false;
+        this.transform.GetComponent<MeshRenderer>().enabled = false;
+        this.explosionEffect.Play();//explosion effect
+
+
+        //physical explosion;
         Collider[] nearbyObjects = Physics.OverlapSphere(this.transform.position, this.explosionRadius);
 
         foreach (Collider col in nearbyObjects)
@@ -71,6 +80,8 @@ public class Enemy : MonoBehaviour
         }
 
         RandomDropCollectable();//drop collectables like "MaxAmmo" via a constant range.
+
+        yield return new WaitForSeconds(1.5f);
 
         Destroy(this.transform.gameObject);
     }

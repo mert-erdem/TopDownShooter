@@ -15,8 +15,21 @@ public class GameManager : MonoBehaviour
     {
         CanvasController canvasController = GameObject.FindGameObjectWithTag("ui").GetComponent<CanvasController>();
         canvasController.TimeStop();
-        string time = canvasController.timeText.text; PlayerPrefs.SetString("TIME", time);
 
+        PlayerPrefs.SetString("TIME", canvasController.timeText.text);
+
+        //get and save the score;
+        /*
+        string time = canvasController.timeText.text;
+        time=time.Trim(':');
+        */
+        if((int)canvasController.time>PlayerPrefs.GetInt("SCORE", 0))
+        {
+            PlayerPrefs.SetInt("SCORE", (int)canvasController.time);
+            PlayerPrefs.SetString("SCORETEXT", canvasController.timeText.text);
+        }
+        
+        
         yield return new WaitForSeconds(2f);
 
         SceneManager.LoadScene("EndScene");

@@ -21,10 +21,7 @@ public class Player : MonoBehaviour
     public static Quaternion lookDir;
 
 
-    void Start()
-    {
-        fizik = transform.GetComponent<Rigidbody>();
-    }
+    void Start() => fizik = transform.GetComponent<Rigidbody>();
 
     void FixedUpdate()
     {
@@ -60,10 +57,5 @@ public class Player : MonoBehaviour
     }
 
     //Game over statement;
-    private void OnDestroy()
-    {
-        GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
-    }
-
-    
+    private void OnDestroy() => GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();    
 }

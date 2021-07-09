@@ -25,10 +25,7 @@ public class Enemy : MonoBehaviour
         explosionEffect = this.transform.GetComponentInChildren<ParticleSystem>();
     }
 
-    void FixedUpdate()
-    {
-        Movement();
-    }
+    void FixedUpdate() => Movement();
 
     private void Movement()
     {
@@ -89,8 +86,6 @@ public class Enemy : MonoBehaviour
     private void RandomDropCollectable()
     {
         if(Random.Range(0, 100)>90)
-        {
             Instantiate(maxAmmo, this.transform.position, Quaternion.identity);
-        }
     }
 }

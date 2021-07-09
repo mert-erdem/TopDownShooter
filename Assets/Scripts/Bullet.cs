@@ -8,10 +8,7 @@ public class Bullet : MonoBehaviour
     public int speed = 30;
     private int damage = 25;
     
-    void Start()
-    {
-        Movement();
-    }
+    void Start() => Movement();
 
     private void OnTriggerEnter(Collider other)
     {

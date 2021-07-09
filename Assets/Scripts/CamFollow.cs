@@ -7,10 +7,7 @@ public class CamFollow : MonoBehaviour
     private Vector3 lookDir; Vector3 newPos;
     private float smoothness=0.1f;
 
-    void Start()
-    {
-        lookDir = transform.position - playerT.position;
-    }
+    void Start() => lookDir = transform.position - playerT.position;
 
     void FixedUpdate()
     {

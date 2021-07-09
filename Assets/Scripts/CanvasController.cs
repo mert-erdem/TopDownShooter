@@ -7,10 +7,7 @@ public class CanvasController : MonoBehaviour
     public TextMeshProUGUI timeText, ammoText;
     public float time;
 
-    void Start()
-    {
-        InvokeRepeating("TimeChange", 0f, 1f);//repeat TimeChange function for each second
-    }
+    void Start() => InvokeRepeating("TimeChange", 0f, 1f);//repeat TimeChange function for each second
 
     private void TimeChange()
     {
@@ -18,13 +15,8 @@ public class CanvasController : MonoBehaviour
         timeText.text = (int)Time.timeSinceLevelLoad/60 + ":" + (int)Time.timeSinceLevelLoad % 60;
     }
 
-    public void TimeStop()//game over state
-    {
-        CancelInvoke("TimeChange");
-    }
+    //game over state
+    public void TimeStop() => CancelInvoke("TimeChange");
 
-    public void AmmoChanged(int ammo)
-    {
-        ammoText.text = "ammo : " + ammo.ToString();
-    }
+    public void AmmoChanged(int ammo) => ammoText.text = "ammo : " + ammo.ToString();
 }

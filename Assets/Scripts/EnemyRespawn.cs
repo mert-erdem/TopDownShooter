@@ -8,30 +8,17 @@ public class EnemyRespawn : MonoBehaviour
     [SerializeField]
     private GameObject enemy;
     private int randomPoint;
-    private float respawnDelay = 2f; private bool optimizer = true;
+    private float respawnDelay = 1.5f;
 
     void Start()
     {
         resPointS = GetComponentsInChildren<Transform>();
+        InvokeRepeating("Spawn", 0, respawnDelay);
     }
 
-    void Update()
+    private void Spawn()
     {
-        if(optimizer)
-        {
-            StartCoroutine(Spawn());
-        }       
-    }
-
-    IEnumerator Spawn()
-    {
-        optimizer = false;
-
-        yield return new WaitForSeconds(respawnDelay);
-
         randomPoint = Random.Range(1, resPointS.Length);
         Instantiate(enemy, resPointS[randomPoint].position, Quaternion.identity);
-
-        optimizer = true;
     }
 }

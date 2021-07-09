@@ -6,14 +6,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    public void GameOver()
-    {
-        StartCoroutine(LoadEnd());
-    }
+    public void GameOver() => StartCoroutine(LoadEnd());
 
     IEnumerator LoadEnd()
     {
-        CanvasController canvasController = GameObject.FindGameObjectWithTag("ui").GetComponent<CanvasController>();
+        var canvasController = GameObject.FindGameObjectWithTag("ui").GetComponent<CanvasController>();
         canvasController.TimeStop();
 
         PlayerPrefs.SetString("TIME", canvasController.timeText.text);
